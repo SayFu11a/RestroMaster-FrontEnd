@@ -6,6 +6,8 @@ import { useSelector } from 'react-redux';
 
 import { selectIsAuth } from '../redux/slices/auth';
 
+import { baseURL } from '../axios';
+
 function ReservationPage() {
    const isAuth = useSelector(selectIsAuth);
    const [reservations, setReservations] = useState([]);
@@ -13,7 +15,7 @@ function ReservationPage() {
    useEffect(() => {
       // Fetch data from the server when the component mounts
       axios
-         .get('http://localhost:4444/booking')
+         .get(`${baseURL}/booking`)
          .then((response) => {
             setReservations(response.data);
          })
@@ -33,15 +35,16 @@ function ReservationPage() {
                <ul>
                   {reservations.map((reservation) => (
                      <li key={reservation._id}>
-                        <p>Название номера: {reservation.title}</p>
-                        <p>Дата заезда: {new Date(reservation.checkInDate).toLocaleDateString()}</p>
+                        <p>Название блюда: {reservation.title}</p>
                         <p>
-                           Дата выезда: {new Date(reservation.checkOutDate).toLocaleDateString()}
+                           Дата бронированияда:{' '}
+                           {new Date(reservation.checkInDate).toLocaleDateString()}
                         </p>
+
                         <p>Имя бронирующего: {reservation.contactInfo.fullName}</p>
                         <p>Email: {reservation.contactInfo.email}</p>
                         <p>Номер телефона: {reservation.contactInfo.phoneNumber}</p>
-                        <p>Гости:</p>
+                        <p>Персоны:</p>
                         {reservation.guests[0].fullName ? (
                            <ul>
                               {reservation.guests.map((guest) => (
@@ -49,7 +52,7 @@ function ReservationPage() {
                               ))}
                            </ul>
                         ) : (
-                           <p>Гостей нет</p>
+                           <p>Персон нет</p>
                         )}
                         <p>Цена: {reservation.tags}</p>
                         <br />

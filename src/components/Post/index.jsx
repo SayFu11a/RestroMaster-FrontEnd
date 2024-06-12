@@ -96,7 +96,7 @@ export const Post = ({
                         variant="outlined"
                         style={{ color: 'black' }}
                         className={styles.buttomText}>
-                        Забронировать номер
+                        Бронировать
                      </Button>
                   </li>
                </ul>

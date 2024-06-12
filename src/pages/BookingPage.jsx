@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import { baseURL } from '../axios';
 
 function BookingPage() {
    const location = useLocation();
@@ -49,7 +50,7 @@ function BookingPage() {
       });
 
       axios
-         .post('http://localhost:4444/booking', {
+         .post(`${baseURL}/booking`, {
             checkInDate,
             checkOutDate,
             contactInfo,
@@ -67,9 +68,9 @@ function BookingPage() {
 
    return (
       <div>
-         <h2>Бронирование номера</h2>
+         <h2>Заказ</h2>
          <label>
-            Дата заезда:
+            Дата бронирования:
             <input
                type="date"
                value={checkInDate}
@@ -77,14 +78,6 @@ function BookingPage() {
             />
          </label>
          <br />
-         <label>
-            Дата выезда:
-            <input
-               type="date"
-               value={checkOutDate}
-               onChange={(e) => setCheckOutDate(e.target.value)}
-            />
-         </label>
          <br />
          <label>
             ФИО:
@@ -116,11 +109,11 @@ function BookingPage() {
 
          {step === 2 && (
             <div>
-               <h2>Информация о гостях</h2>
+               <h2>Информация о персонах</h2>
                {guests.map((guest) => (
                   <div key={guest.id}>
                      <label>
-                        ФИО гостя {guest.id}:
+                        ФИО персоны {guest.id}:
                         <input
                            type="text"
                            value={guest.fullName}

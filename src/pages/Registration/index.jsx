@@ -9,6 +9,8 @@ import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import { useForm } from 'react-hook-form';
 
+import { styled } from '@mui/system';
+
 import styles from './Login.module.scss';
 import { fetchUserData, fetchRegister, selectIsAuth } from '../../redux/slices/auth';
 
@@ -28,6 +30,19 @@ export const Registration = () => {
       mode: 'onChange',
    });
 
+   const CustomButton = styled(Button)(({ theme }) => ({
+      backgroundColor: '#000',
+      color: '#fff',
+      transition: 'background-color 0.3s',
+      '&:hover': {
+         backgroundColor: '#333',
+      },
+      '&:disabled': {
+         backgroundColor: '#555',
+         color: '#ccc',
+      },
+   }));
+
    const onSubmit = async (values) => {
       const data = await dispatch(fetchRegister(values));
 
@@ -45,29 +60,37 @@ export const Registration = () => {
    }
 
    return (
-      <Paper classes={{ root: styles.root }}>
+      <div
+         style={{
+            width: '500px',
+            padding: '50px',
+            border: '1px solid #000',
+            borderRadius: '20px',
+            backgroundColor: '#fff',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+            textAlign: 'center',
+            margin: '50px auto',
+         }}
+         classes={styles.root}>
          <Typography classes={{ root: styles.title }} variant="h5">
-            Создание аккаунта
+            Регистрация
          </Typography>
-         <div className={styles.avatar}>
-            <Avatar sx={{ width: 100, height: 100 }} />
-         </div>
          <form onSubmit={handleSubmit(onSubmit)}>
             <TextField
                error={Boolean(errors.fullName?.message)}
                helperText={errors.fullName?.message}
-               {...register('fullName', { required: 'Укажите полное имя' })}
+               {...register('fullName', { required: 'Имя...' })}
                className={styles.field}
-               label="Полное имя"
+               label="Введите имя"
                fullWidth
             />
             <TextField
                error={Boolean(errors.email?.message)}
                helperText={errors.email?.message}
                type="email"
-               {...register('email', { required: 'Укажите почту' })}
+               {...register('email', { required: 'Укажите E-Mail' })}
                className={styles.field}
-               label="E-Mail"
+               label="Почта"
                fullWidth
             />
             <TextField
@@ -79,10 +102,15 @@ export const Registration = () => {
                label="Пароль"
                fullWidth
             />
-            <Button disabled={!isValid} type="submit" size="large" variant="contained" fullWidth>
+            <CustomButton
+               disabled={!isValid}
+               type="submit"
+               size="large"
+               variant="contained"
+               fullWidth>
                Зарегистрироваться
-            </Button>
+            </CustomButton>
          </form>
-      </Paper>
+      </div>
    );
 };

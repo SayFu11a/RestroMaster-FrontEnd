@@ -11,6 +11,7 @@ import 'easymde/dist/easymde.min.css';
 import { selectIsAuth } from '../../redux/slices/auth';
 import axios from '../../axios';
 import styles from './AddPost.module.scss';
+import { baseURL } from '../../axios';
 
 export const AddPost = () => {
    const { id } = useParams();
@@ -117,11 +118,7 @@ export const AddPost = () => {
                <Button variant="contained" color="error" onClick={onClickRemoveImage}>
                   Удалить
                </Button>
-               <img
-                  className={styles.image}
-                  src={`http://localhost:4444${imageUrl}`}
-                  alt="Uploaded"
-               />
+               <img className={styles.image} src={`${baseURL}${imageUrl}`} alt="Uploaded" />
             </>
          )}
 
@@ -130,7 +127,7 @@ export const AddPost = () => {
          <TextField
             classes={{ root: styles.title }}
             variant="standard"
-            placeholder="Название номера..."
+            placeholder="Название блюда..."
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             fullWidth

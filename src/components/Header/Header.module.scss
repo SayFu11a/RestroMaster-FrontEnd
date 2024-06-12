@@ -1,9 +1,19 @@
 .root {
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.5); /* Полупрозрачный фон */
   padding: 10px 0;
   border-bottom: 1px solid #e0e0e0;
-  margin-bottom: 30px;
+  // margin-bottom: 30px;
+  transition: background-color 0.3s, border-bottom-color 0.3s; /* Плавный переход для ховера */
+  position: sticky;
+  top: 0px;
+  z-index: 2;
 }
+
+.root:hover {
+  background-color: rgba(255, 255, 255, 0.8); /* Менее прозрачный фон при наведении */
+  border-bottom-color: #bdbdbd; /* Изменение цвета границы при наведении */
+}
+
 
 .inner {
   display: flex;
@@ -12,14 +22,12 @@
 
 .logo {
   // display: flex;
-  background-color: #fff;
   color: black;
   font-weight: 700;
   line-height: 35px;
   // text-transform: uppercase;
   letter-spacing: 0.15px;
   border-radius: 5px;
-  padding: 0 10px;
   text-decoration: none;
 
   &:hover {

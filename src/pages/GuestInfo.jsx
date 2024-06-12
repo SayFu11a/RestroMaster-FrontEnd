@@ -12,7 +12,7 @@ function GuestInfo() {
    return (
       <div>
          <h2>Guest Information</h2>
-         <p>Название номера: {title}</p>
+         <p>Название блюда: {title}</p>
          <p>Check-in Date: {checkInDate}</p>
          <p>Check-out Date: {checkOutDate}</p>
          <p>Contact Information:</p>

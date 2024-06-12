@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Grid from '@mui/material/Grid';
+import { Link } from 'react-router-dom';
 
 import { Post } from '../components/Post';
 import { TagsBlock } from '../components/TagsBlock';
 import { CommentsBlock } from '../components/CommentsBlock';
 import { fetchPosts, fetchTags } from '../redux/slices/post';
 
+import { baseURL } from '../axios';
+
 // import { get } from 'react-hook-form';
 
-export const Home = () => {
+export const Home = forwardRef((props, ref) => {
    const dispatch = useDispatch();
    const userData = useSelector((state) => state.auth.data);
    const { posts, tags } = useSelector((state) => state.posts);
@@ -28,9 +31,16 @@ export const Home = () => {
 
    return (
       <>
-         <Tabs style={{ marginBottom: 15 }} value={0} aria-label="basic tabs example">
-            <Tab label="Новые" />
-            <Tab label="Популярные" />
+         <Tabs
+            ref={ref}
+            style={{ marginBottom: 15, backgroundColor: '#fff' }}
+            value={0}
+            aria-label="basic tabs example">
+            <Tab label="Меню" />
+
+            <Link to="/about-us">
+               <Tab label="О нас" />
+            </Link>
          </Tabs>
          <Grid container spacing={4}>
             <Grid xs={8} item>
@@ -41,7 +51,7 @@ export const Home = () => {
                      <Post
                         id={obj._id}
                         title={obj.title}
-                        imageUrl={obj.imageUrl ? `http://localhost:4444${obj.imageUrl}` : ''}
+                        imageUrl={obj.imageUrl ? `${baseURL}${obj.imageUrl}` : ''}
                         user={obj.user}
                         createdAt={obj.createdAt}
                         viewsCount={obj.viewsCount}
@@ -77,4 +87,4 @@ export const Home = () => {
          </Grid>
       </>
    );
-};
+});

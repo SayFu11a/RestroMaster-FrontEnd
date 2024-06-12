@@ -25,20 +25,20 @@ export const Header = () => {
                <Link className={styles.logo} to="/">
                   <img
                      width={80}
-                     height={60}
-                     src="https://raw.githubusercontent.com/SayFu11a/-/main/chrome_yD1kImMOnf.png"
+                     height={56}
+                     src="https://raw.githubusercontent.com/SayFu11a/chocolade/b498a58c74cfec3b935dd84f93923338ce2a6433/Home_files/chrome_lYYepB2Wq8.png"
                      alt="Logopng"
                   />
-                  <div className={styles.title}>система для бронирования номеров в гостиницах</div>
+                  <div className={styles.title}>RestroMaster</div>
                </Link>
                <div className={styles.buttons}>
                   {isAuth ? (
                      <>
                         <Link to="/reservation">
-                           <Button variant="contained">Редактировать брони</Button>
+                           <Button variant="contained">Заказы</Button>
                         </Link>
                         <Link to="/add-post">
-                           <Button variant="contained">Добавить номер</Button>
+                           <Button variant="contained">Добавить блюдо</Button>
                         </Link>
                         <Button onClick={onClickLogout} variant="contained" color="error">
                            Выйти

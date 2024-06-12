@@ -8,6 +8,8 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import { useForm } from 'react-hook-form';
 
+import { styled } from '@mui/system';
+
 import styles from './Login.module.scss';
 import { fetchUserData, selectIsAuth } from '../../redux/slices/auth';
 
@@ -42,10 +44,23 @@ export const Login = () => {
       return <Navigate to="/" />;
    }
 
+   const CustomButton = styled(Button)(({ theme }) => ({
+      backgroundColor: '#000',
+      color: '#fff',
+      transition: 'background-color 0.3s',
+      '&:hover': {
+         backgroundColor: '#333',
+      },
+      '&:disabled': {
+         backgroundColor: '#555',
+         color: '#ccc',
+      },
+   }));
+
    return (
       <Paper classes={{ root: styles.root }}>
          <Typography classes={{ root: styles.title }} variant="h5">
-            Вход в аккаунт
+            Аторизация
          </Typography>
          <form onSubmit={handleSubmit(onSubmit)}>
             <TextField
@@ -65,9 +80,14 @@ export const Login = () => {
                {...register('password', { required: 'Укажите пароль' })}
                fullWidth
             />
-            <Button disabled={!isValid} type="submit" size="large" variant="contained" fullWidth>
-               Войти
-            </Button>
+            <CustomButton
+               disabled={!isValid}
+               type="submit"
+               size="large"
+               variant="contained"
+               fullWidth>
+               login
+            </CustomButton>
          </form>
       </Paper>
    );
